@@ -1,7 +1,7 @@
 package com.chrisspringboot.demo.Domin.Repository;
 
-import com.chrisspringboot.demo.Domin.Model.User;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository implements MongoRepository<User, String> {
+@Repository
+public interface UserRepository extends MongoRepository<User, String> {
 }
