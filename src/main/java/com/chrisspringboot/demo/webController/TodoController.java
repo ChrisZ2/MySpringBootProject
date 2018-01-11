@@ -27,7 +27,7 @@ import com.chrisspringboot.demo.service.TodoService;
  */
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("*")
+@CrossOrigin("localhost:4200")
 public class TodoController {
 
 	private TodoService todoService;

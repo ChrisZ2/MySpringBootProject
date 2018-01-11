@@ -1,12 +1,16 @@
 package com.chrisspringboot.demo.Domin.Model;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "User")
+@CompoundIndex(def = "{'isAdmin':1, 'timeCreated':1}")
 public class User {
     @Id
     private String userName;
@@ -18,9 +22,40 @@ public class User {
     private String userEmail;
     @NotNull
     private String userPassWord;
+    private boolean isAdmin;
+    @NotNull
+    private Date timeCreated;
+    public User(String userName, String firstName, String lastName,
+			String userEmail, String userPassWord, boolean isAdmin,
+			Date timeCreated) {
+		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userEmail = userEmail;
+		this.userPassWord = userPassWord;
+		this.isAdmin = isAdmin;
+		this.timeCreated = timeCreated;
+	}
 
+	public Date getTimeCreated() {
+		return timeCreated;
+	}
 
-    public User() {
+	public void setTimeCreated(Date timeCreated) {
+		this.timeCreated = timeCreated;
+	}
+
+	
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public User() {
 
     }
 
@@ -28,22 +63,13 @@ public class User {
 	public String toString() {
 		return "User [userName=" + userName + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", userEmail=" + userEmail
-				+ ", userPassWord=" + userPassWord + "]";
+				+ ", userPassWord=" + userPassWord + ", isAdmin=" + isAdmin
+				+ ", timeCreated=" + timeCreated + "]";
 	}
 
     public String getUserEmail() {
         return userEmail;
     }
-
-    public User(String userName, String firstName, String lastName,
-			String userEmail, String userPassWord) {
-		super();
-		this.userName = userName;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.userEmail = userEmail;
-		this.userPassWord = userPassWord;
-	}
 
 	public String getFirstName() {
 		return firstName;
